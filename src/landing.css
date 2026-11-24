@@ -1,0 +1,857 @@
+/* The landing page is its own open landscape; workspace navigation stays inside. */
+.app.landing-page {
+  --landing-gutter: clamp(20px, 4vw, 72px);
+  display: block;
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #f1f5e9;
+}
+.app.landing-page .sidebar,
+.app.landing-page header {
+  display: none;
+}
+.app.landing-page .main {
+  margin-left: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.app.landing-page main {
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+  padding: 0 0 16px;
+  margin: 0;
+  position: relative;
+}
+.forest-scene {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.forest-scene > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.paper-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.35' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+.landing-topline {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 2 * var(--landing-gutter));
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(12px, 2.4dvh, 28px) 0;
+  gap: 16px;
+}
+.tiny-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 10px;
+  color: #758a7b;
+  letter-spacing: 0.25px;
+}
+.tiny-brand img {
+  width: 24px;
+  height: 26px;
+  opacity: 0.8;
+}
+.forest-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff64;
+  border-color: #dbe5da;
+  border-radius: 30px;
+  padding: 8px 13px;
+  font-size: 10px;
+  color: #6e8476;
+}
+.forest-status > i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c69c62;
+}
+.forest-status > i.is-online {
+  background: #709e6d;
+}
+.forest-status > span {
+  font-size: 14px;
+  margin-left: 7px;
+}
+/* Brand hero expands into spare vertical space on taller windows. */
+.landing-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(16px, 4dvh, 48px) 24px 13px;
+  text-align: center;
+  position: relative;
+}
+.hero-kicker {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: #79917d;
+  font-weight: 500;
+}
+.hero-identity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin: 21px auto 12px;
+}
+.hero-identity > img {
+  width: 104px;
+  height: 114px;
+  transform: rotate(-6deg);
+  filter: drop-shadow(5px 9px 4px #527a4d12);
+}
+.hero-identity h1 {
+  font-family: Manrope, sans-serif;
+  font-size: 100px;
+  font-weight: 800;
+  letter-spacing: -7px;
+  line-height: 1.15;
+  color: #30543e;
+  margin: 0;
+}
+.hero-identity h1 > span {
+  color: #e38549;
+}
+.landing-hero > p {
+  font-size: 17px;
+  letter-spacing: -0.2px;
+  color: #5b7562;
+  margin: 18px 0 6px;
+}
+.hero-caption {
+  color: #91a08e;
+  font-size: 11px;
+}
+.hero-trail {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 23px 0 14px;
+  align-items: center;
+}
+.hero-trail span {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #afbe9f;
+}
+.hero-trail span:nth-child(2) {
+  width: 5px;
+  height: 5px;
+  background: #94ad87;
+}
+/* Connection gallery: toolbar, responsive cards, and the empty-search state. */
+.forest-gallery {
+  flex-shrink: 0;
+  width: calc(100% - 2 * var(--landing-gutter));
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(12px, 2.5dvh, 30px) 0 0;
+}
+.gallery-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 23px;
+  gap: 20px;
+}
+.gallery-kicker {
+  font-size: 8px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: #7b8c73;
+}
+.gallery-toolbar h2 {
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 650;
+  letter-spacing: -0.65px;
+  margin: 5px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  color: #3f5843;
+}
+.collection-count {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #718568;
+  background: #e5ebdb;
+  border: 1px solid #d8e1cd;
+  padding: 0 7px;
+  border-radius: 5px;
+}
+.gallery-actions {
+  display: flex;
+  min-width: 0;
+  gap: 10px;
+  align-items: center;
+}
+.gallery-actions .search {
+  min-width: 0;
+  background: #ffffffe0;
+  border-color: #dfe5d9;
+  border-radius: 7px;
+}
+.gallery-actions .search input {
+  width: 155px;
+  font-size: 11px;
+  padding: 11px 0;
+}
+.gallery-actions .primary {
+  flex-shrink: 0;
+  font-size: 11px;
+  padding: 12px 17px;
+  white-space: nowrap;
+  box-shadow: 0 4px 9px #be723522;
+}
+.forest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+.forest-card {
+  --card-light: #eef2e6;
+  --card-deep: #dce7ce;
+  min-width: 0;
+  text-align: left;
+  padding: 0;
+  border: 1px solid #e0e4d6;
+  border-radius: 4px 15px 4px 4px;
+  background: #fffef9;
+  overflow: hidden;
+  box-shadow:
+    0 5px 0 -2px #e7ebdd,
+    0 6px 0 -2px #ccd6c1,
+    0 12px 23px -13px #56704438;
+  transition:
+    transform 0.22s,
+    box-shadow 0.22s;
+  position: relative;
+}
+.forest-card::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 17px;
+  height: 17px;
+  background: linear-gradient(45deg, #c3cdbb 50%, #f5f8f0 51%);
+  box-shadow: -1px 1px 2px #52654b18;
+  border-bottom-left-radius: 2px;
+}
+.forest-card:hover {
+  transform: translateY(-7px) rotate(-0.5deg);
+  background: #fffef9;
+  box-shadow:
+    0 5px 0 -2px #e7ebdd,
+    0 6px 0 -2px #ccd6c1,
+    0 20px 28px -12px #56704440;
+}
+.forest-card:disabled:hover {
+  transform: none;
+}
+.palette-1 {
+  --card-light: #f7eddf;
+  --card-deep: #edddc4;
+}
+.palette-2 {
+  --card-light: #eaf2f4;
+  --card-deep: #d9e7ed;
+}
+.palette-3 {
+  --card-light: #f1edf5;
+  --card-deep: #e5dcef;
+}
+.palette-4 {
+  --card-light: #f3f2e3;
+  --card-deep: #e5e5c6;
+}
+.palette-5 {
+  --card-light: #f9eded;
+  --card-deep: #f0dcda;
+}
+.card-illustration {
+  position: relative;
+  height: clamp(150px, 22dvh, 205px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-light);
+  overflow: hidden;
+  border-bottom: 1px solid #dfe5d333;
+}
+.card-illustration::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(120deg, #ffffff45, transparent 65%);
+  pointer-events: none;
+}
+.card-kind {
+  position: absolute;
+  top: 19px;
+  left: 18px;
+  color: #7f8d79;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  z-index: 1;
+}
+.card-orbit {
+  position: absolute;
+  width: 132px;
+  height: 132px;
+  border: 1px dashed #93ab7a40;
+  border-radius: 50%;
+  top: 29px;
+}
+.illustration-spark {
+  position: absolute;
+  right: 24px;
+  top: 44px;
+  color: #94a78190;
+  font-size: 21px;
+}
+.paper-dinosaur {
+  width: 100%;
+  max-width: 290px;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(3px 7px 3px #3c563510);
+}
+.card-illustration .paper-dinosaur {
+  margin-top: 19px;
+  padding: 7px;
+}
+.dino-base {
+  fill: var(--dino-base);
+}
+.dino-light {
+  fill: var(--dino-light);
+}
+.dino-dark {
+  fill: var(--dino-dark);
+}
+.dino-crease {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 0.7;
+  opacity: 0.28;
+}
+.paper-ground {
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  height: 34px;
+  background: var(--card-deep);
+  clip-path: polygon(0 75%, 30% 20%, 62% 90%, 100% 30%, 100% 100%, 0 100%);
+  opacity: 0.5;
+}
+.forest-card-content {
+  padding: 21px 19px 15px;
+}
+.forest-card-content h3 {
+  font-size: 14px;
+  color: #3d543f;
+  letter-spacing: -0.25px;
+  margin: 0 0 8px;
+  text-transform: capitalize;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+.forest-card-content > p {
+  font-size: 10px;
+  color: #929b86;
+  margin: 0 0 22px;
+  line-height: 1.7;
+}
+.forest-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #edefe5;
+  padding-top: 13px;
+  font-size: 9px;
+  color: #8d9b82;
+  gap: 8px;
+}
+.forest-card-meta > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.forest-card-meta i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #8eac7b;
+}
+.open-graph {
+  display: grid;
+  place-items: center;
+  background: #f4f5ec;
+  border: 1px solid #e9ecdf;
+  color: #7b936c;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 13px;
+}
+.gallery-whisper {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #819674;
+  font-size: 10px;
+  margin: 37px 0 17px;
+}
+.gallery-whisper > span {
+  font-size: 25px;
+  line-height: 1;
+  color: #8ea17c;
+}
+.forest-empty {
+  background: #fffff9b0;
+  border: 1px dashed #c5d3b8;
+  padding: 45px 20px;
+  border-radius: 8px;
+  text-align: center;
+  color: #718468;
+}
+.forest-empty > span {
+  font-size: 28px;
+}
+.forest-empty h3 {
+  margin: 10px 0;
+}
+.forest-empty p {
+  font-size: 12px;
+}
+.landing-page .error {
+  flex-shrink: 0;
+  max-width: 1600px;
+  width: calc(100% - 2 * var(--landing-gutter));
+  margin: 15px auto;
+  background: #fff5ed;
+}
+/* New Graph setup uses the workspace shell rather than the forest landing page. */
+.create-paper {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  border: 1px solid #e0e5d6;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fffef9;
+  max-width: 1000px;
+  margin: 35px auto;
+  box-shadow: 0 8px 30px #3d553908;
+}
+.create-illustration {
+  background: #edf1e3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 25px;
+  background-image: linear-gradient(140deg, #f7f8ee80 40%, transparent 40%);
+}
+.create-illustration .paper-dinosaur {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 20px;
+}
+.create-illustration > span {
+  text-align: center;
+  font-family: Manrope, sans-serif;
+  font-size: 20px;
+  color: #718460;
+  line-height: 1.6;
+  letter-spacing: -0.5px;
+}
+.create-graph-form {
+  padding: 48px 38px;
+}
+.create-graph-form h2 {
+  font-size: 25px;
+  margin: 12px 0;
+  line-height: 1.5;
+}
+.create-graph-form > p {
+  font-size: 12px;
+  color: #87947b;
+  margin-bottom: 25px;
+}
+.create-graph-form > label {
+  display: block;
+  font-size: 11px;
+  color: #627653;
+  margin-bottom: 9px;
+}
+.create-graph-form > input {
+  width: 100%;
+  background: #fff;
+  padding: 13px;
+  font-size: 12px;
+}
+.create-graph-form > small {
+  display: block;
+  margin: 9px 0 25px;
+  font-size: 9px;
+  color: #949d89;
+  line-height: 1.7;
+}
+.create-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+.create-actions > button {
+  font-size: 11px;
+}
+.create-offline {
+  background: #f6f1e5;
+  border: 1px solid #eae1cb;
+  border-radius: 6px;
+  padding: 12px;
+}
+.create-offline p {
+  font-size: 10px;
+  color: #988968;
+  margin: 0 0 8px;
+}
+.create-offline button {
+  padding: 6px 10px;
+  font-size: 10px;
+}
+/* Width breakpoints control columns; shorter desktop heights are handled afterward. */
+@media (min-width: 1600px) and (min-height: 801px) {
+  .hero-identity h1 {
+    font-size: 116px;
+  }
+  .hero-identity > img {
+    width: 120px;
+    height: 130px;
+  }
+}
+@media (max-width: 1100px) {
+  .forest-grid {
+    gap: 15px;
+  }
+  .forest-card-content {
+    padding: 16px 13px 12px;
+  }
+  .forest-card-content h3 {
+    font-size: 12px;
+  }
+  .forest-card-content > p {
+    font-size: 9px;
+  }
+  .card-illustration {
+    height: 160px;
+  }
+  .card-kind {
+    top: 13px;
+    left: 12px;
+    font-size: 6px;
+  }
+  .card-orbit {
+    width: 105px;
+    height: 105px;
+  }
+  .illustration-spark {
+    right: 14px;
+  }
+  .forest-card-meta {
+    font-size: 8px;
+  }
+}
+@media (max-width: 900px) {
+  .forest-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+  .forest-gallery {
+    max-width: 720px;
+  }
+  .card-illustration {
+    height: 195px;
+  }
+  .forest-card-content {
+    padding: 20px;
+  }
+  .forest-card-content h3 {
+    font-size: 14px;
+  }
+  .forest-card-content > p {
+    font-size: 10px;
+  }
+  .card-kind {
+    top: 19px;
+    left: 18px;
+    font-size: 7px;
+  }
+  .forest-card-meta {
+    font-size: 9px;
+  }
+  .create-paper {
+    grid-template-columns: 1fr;
+  }
+  .create-illustration {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .landing-topline {
+    padding: 16px 0;
+  }
+  .tiny-brand {
+    font-size: 0;
+    gap: 0;
+  }
+  .tiny-brand img {
+    width: 27px;
+    height: 30px;
+  }
+  .forest-status {
+    font-size: 9px;
+    padding: 7px 10px;
+  }
+  .landing-hero {
+    padding: clamp(16px, 4dvh, 44px) 16px 10px;
+  }
+  .hero-kicker {
+    font-size: 7px;
+    letter-spacing: 1.7px;
+  }
+  .hero-identity {
+    gap: 8px;
+    margin-top: 22px;
+  }
+  .hero-identity h1 {
+    font-size: clamp(52px, 14vw, 76px);
+    letter-spacing: -5px;
+  }
+  .hero-identity > img {
+    width: clamp(60px, 14vw, 72px);
+    height: auto;
+  }
+  .landing-hero > p {
+    font-size: 14px;
+  }
+  .hero-caption {
+    font-size: 10px;
+  }
+  .forest-gallery {
+    padding-top: 22px;
+  }
+  .gallery-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .gallery-toolbar h2 {
+    font-size: 20px;
+  }
+  .gallery-actions {
+    width: 100%;
+  }
+  .gallery-actions .search {
+    flex: 1;
+  }
+  .gallery-actions .search input {
+    width: 100%;
+    min-width: 0;
+  }
+  .gallery-actions .primary {
+    padding: 12px;
+  }
+  .forest-grid {
+    gap: 14px;
+  }
+  .card-illustration {
+    height: 145px;
+  }
+  .card-illustration .paper-dinosaur {
+    padding: 0;
+  }
+  .card-kind {
+    font-size: 6px;
+    left: 10px;
+    top: 12px;
+    letter-spacing: 1px;
+  }
+  .card-orbit {
+    width: 95px;
+    height: 95px;
+    top: 25px;
+  }
+  .illustration-spark {
+    font-size: 15px;
+    right: 12px;
+    top: 29px;
+  }
+  .forest-card-content {
+    padding: 15px 11px 12px;
+  }
+  .forest-card-content h3 {
+    font-size: 12px;
+  }
+  .forest-card-content > p {
+    font-size: 9px;
+    margin-bottom: 16px;
+  }
+  .forest-card-meta {
+    font-size: 8px;
+  }
+  .open-graph {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .gallery-whisper {
+    font-size: 9px;
+    margin-top: 25px;
+  }
+  .create-graph-form {
+    padding: 30px 22px;
+  }
+  .create-graph-form h2 {
+    font-size: 22px;
+  }
+}
+@media (max-width: 360px) {
+  .forest-grid {
+    grid-template-columns: 1fr;
+  }
+  .card-illustration {
+    height: 180px;
+  }
+  .hero-identity h1 {
+    font-size: 63px;
+  }
+  .hero-identity > img {
+    width: 60px;
+  }
+}
+/* Keep the first row in view on shorter desktop windows; extra rows still scroll. */
+@media (min-width: 901px) and (max-height: 800px) {
+  .landing-topline {
+    padding: 12px 0;
+  }
+  .landing-hero {
+    padding: 12px 24px 0;
+  }
+  .hero-identity {
+    margin: 12px auto 8px;
+  }
+  .hero-identity h1 {
+    font-size: clamp(56px, 10dvh, 80px);
+    letter-spacing: -5px;
+  }
+  .hero-identity > img {
+    width: clamp(58px, 10dvh, 80px);
+    height: auto;
+  }
+  .landing-hero > p {
+    font-size: 15px;
+    margin: 10px 0 4px;
+  }
+  .hero-trail {
+    margin: 12px 0 4px;
+  }
+  .forest-gallery {
+    padding-top: 12px;
+  }
+  .gallery-toolbar {
+    margin-bottom: 16px;
+  }
+  .card-illustration {
+    height: clamp(100px, 20dvh, 150px);
+  }
+  .card-orbit {
+    width: 100px;
+    height: 100px;
+    top: 18px;
+  }
+  .card-illustration .paper-dinosaur {
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+    margin-top: 0;
+  }
+  .forest-card-content {
+    padding: 14px 16px 12px;
+  }
+  .forest-card-content > p {
+    margin-bottom: 12px;
+  }
+  .forest-card-meta {
+    padding-top: 10px;
+  }
+  .gallery-whisper {
+    margin: 18px 0 8px;
+  }
+}
+@media (min-width: 901px) and (max-height: 600px) {
+  .landing-topline {
+    padding: 8px 0;
+  }
+  .landing-hero {
+    padding-top: 8px;
+  }
+  .hero-identity {
+    margin: 6px auto;
+  }
+  .landing-hero > p {
+    margin-top: 6px;
+  }
+  .hero-trail {
+    display: none;
+  }
+  .gallery-whisper {
+    margin-top: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .forest-card {
+    transition: none;
+  }
+  .forest-card:hover {
+    transform: none;
+  }
+}

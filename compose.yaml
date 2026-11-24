@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: gibble
+      POSTGRES_PASSWORD: gibble_local
+      POSTGRES_DB: postgres
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - gibble_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U gibble -d postgres']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  gibble_data:

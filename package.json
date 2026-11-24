@@ -1,0 +1,32 @@
+{
+  "name": "gibble",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"node --watch server/index.js\" \"vite --host 0.0.0.0\"",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "db:check": "node server/check-database.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --test server/*.test.js"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@tanstack/react-table": "^8.21.3",
+    "cytoscape": "^3.33.1",
+    "dotenv": "^17.2.3",
+    "echarts": "^6.0.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
+    "concurrently": "^9.2.1",
+    "prettier": "3.9.10",
+    "vite": "^7.2.2"
+  }
+}
